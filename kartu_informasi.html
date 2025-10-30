@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kartu Informasi</title>
+    <style>
+        /* Menentukan container utama untuk memastikan card di tengah */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #cc94e6;
+        }
+
+        .card-fakta {
+            background-color: rgb(230, 132, 205);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgb (238, 233, 146, 0.1);
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #factimage {
+            width: 80%; /* Sesuaikan dengan ukuran card */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            margin: 0 0 10px 0;
+        }
+
+        .subtitle {
+            color: rgb(238, 252, 39);
+            font-size: 1em;
+            margin: 0 0 20px 0;
+        }
+
+        .facts-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .facts-list li {
+            margin: 10px 0;
+        }
+
+        .btn-next {
+            padding: 10px 20px;
+            background-color: #e6576e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-next:hover {
+            background-color: #4371ee;
+        }
+    </style>
+</head>
+<body>
+    <div class="card-fakta">
+        <img src="manusia.jpg" alt="human" id="factimage">
+        <div class="content">
+            <h2>Fakta Fakta Menarik Manusia</h2>
+            <p class="subtitle">Tahukah Kamu Fakta Fakta Unik Ini?</p>
+            <ul class="facts-list" id="factlist">
+                <li>Manusia dapat mengenali hingga satu triliun aroma yang berbeda.</li>
+                <li>Pembuluh darah manusia bisa mengelilingi Bumi empat kali jika direntangkan.</li>
+                <li>Manusia dapat kehilangan sekitar 4 kg sel kulit setiap tahunnya. </li>
+                <li>Manusia lebih tinggi sekitar 1 cm saat bangun tidur di pagi hari dibandingkan saat malam hari. </li>
+            </ul>
+            <button class="btn-next" id="nextfact">Fakta Selanjutnya</button>
+        </div>
+    </div>
+
+    <script>
+        const factData = [
+            {
+                image:"otak.jpg",
+                facts: [
+                    "Otak manusia memiliki sekitar 100 miliar neuron.",
+                    "Memiliki kapasitas penyimpanan hampir tak terbatas.",
+                    "Otak bahkan bisa lebih aktif saat tidur daripada saat terjaga.",
+                    "Otak manusia tidak merasakan sakit."
+                    
+                ]
+            },
+            {
+                image: "tulang.jpg",
+                facts: [
+                    "Kerangka manusia tersusun dari lebih dari 200 tulang.",
+                    "Bayi manusia dilahirkan dengan jumlah 300 tulang.",
+                    "Tulang diisi dengan jaringan seperti sponge.",
+                    "Tulang manusia, seperti tulang paha, lebih kuat dari beton dengan kualitas dan ukuran yang sama. "
+                ]
+            },
+            {
+                image: "otott.jpg",
+                facts: [
+                    "Manusia memiliki lebih dari 600 otot yang menyumbang sekitar 40% berat badan.",
+                    "Wajah manusia memiliki 43 otot yang mengendalikan ekspresi wajah.",
+                    "Otot jantung adalah otot yang bekerja paling keras, sedangkan otot mata bisa bergerak 100.000 kali sehari.",
+                    "Otot rahang (masseter) sebagai otot terkuat berdasarkan rasio beratnya."
+                ]
+            },
+            {
+                image: "pemb darah.jpg",
+                facts: [
+                    "Jika semua pembuluh darah dewasa dibentangkan, panjangnya dapat mengelilingi Bumi sebanyak empat kali, atau sekitar 100.000 kilometer.",
+                    "Membawa 1 juta barel darah seumur hidup.",
+                    "Pembuluh darah dipengaruhi oleh cuaca."
+                ]
+            }
+        ];
+
+        const factList = document.getElementById("factlist");
+        const factImage = document.getElementById("factimage");
+        const nextBtn = document.getElementById("nextfact");
+
+        nextBtn.addEventListener("click", () => {
+            factList.classList.add("fade-out");
+            setTimeout(() => {
+                const randomFact = factData[Math.floor(Math.random() * factData.length)];
+                factImage.style.opacity = 0;
+
+                setTimeout(() => {
+                    factImage.src = randomFact.image;
+                    factImage.style.opacity = 1;
+                }, 400);
+
+                factList.innerHTML = randomFact.facts.map(f => `<li>${f}</li>`).join("");
+                factList.classList.remove("fade-out");
+            }, 500);
+        });
+    </script>
+</body>
+</html>
